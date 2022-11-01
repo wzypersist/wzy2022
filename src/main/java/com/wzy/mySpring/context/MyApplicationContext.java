@@ -23,9 +23,13 @@ public class MyApplicationContext {
 
     private Map<String,Object> singletonObjects = new HashMap<>();
 
+    private Map<String,Object> secondCache = new HashMap<>();
+
     public MyApplicationContext(Class configClass) {
 
         this.configClass = configClass;
+
+        prepareBeanFactory();
 
         scan(configClass);
 
@@ -35,6 +39,13 @@ public class MyApplicationContext {
             Object bean = doCreateBean(beanName, beanDefinition);
             singletonObjects.put(beanName,bean);
         }
+
+    }
+
+    private void prepareBeanFactory() {
+
+        ValueBeanPostProcessor valueBeanPostProcessor = new ValueBeanPostProcessor();
+        beanPostProcessorList.add(valueBeanPostProcessor);
 
     }
 
@@ -55,6 +66,7 @@ public class MyApplicationContext {
         Object instance = null;
         try {
             instance = clazz.getConstructor().newInstance();
+            secondCache.put(beanName,instance);
             for (Field field : clazz.getDeclaredFields()) {
                 if(field.isAnnotationPresent(Autowired.class)){
                     field.setAccessible(true);
@@ -100,6 +112,9 @@ public class MyApplicationContext {
         }
         BeanDefinition beanDefinition = beanDefinitionMap.get(beanName);
         if(beanDefinition.getScope().equals("singleton")){
+            if(secondCache.get(beanName) != null){
+                return secondCache.get(beanName);
+            }
             Object singletonBean = singletonObjects.get(beanName);
             if(singletonBean == null){
                 singletonBean = doCreateBean(beanName, beanDefinition);

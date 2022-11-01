@@ -6,6 +6,7 @@ import com.wzy.mySpring.annotation.Component;
 @Component
 public class Account {
 
-
+    @Autowired
+    private User user;
 
 }
