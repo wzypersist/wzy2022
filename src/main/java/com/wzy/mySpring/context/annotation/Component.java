@@ -1,4 +1,4 @@
-package com.wzy.mySpring.annotation;
+package com.wzy.mySpring.context.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface ComponentScan {
+public @interface Component {
 
     String value() default "";
 }

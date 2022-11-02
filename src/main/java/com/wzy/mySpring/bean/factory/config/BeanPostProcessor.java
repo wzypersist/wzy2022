@@ -1,4 +1,4 @@
-package com.wzy.mySpring.context;
+package com.wzy.mySpring.bean.factory.config;
 
 public interface BeanPostProcessor {
 

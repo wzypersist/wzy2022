@@ -1,4 +1,4 @@
-package com.wzy.mySpring.annotation;
+package com.wzy.mySpring.context.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,8 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(value = RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface Component {
+@Target(ElementType.FIELD)
+public @interface Value {
 
     String value() default "";
+
 }

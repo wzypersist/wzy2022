@@ -1,7 +1,8 @@
 package com.wzy.mySpring.context;
 
-import com.wzy.mySpring.annotation.Component;
-import com.wzy.mySpring.annotation.Value;
+import com.wzy.mySpring.bean.factory.config.BeanPostProcessor;
+import com.wzy.mySpring.context.annotation.Component;
+import com.wzy.mySpring.context.annotation.Value;
 
 import java.lang.reflect.Field;
 

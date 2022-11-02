@@ -1,13 +1,14 @@
 package com.wzy.mySpring.context;
 
-import com.wzy.mySpring.annotation.Autowired;
-import com.wzy.mySpring.annotation.Component;
-import com.wzy.mySpring.annotation.ComponentScan;
-import com.wzy.mySpring.annotation.Scope;
+import com.wzy.mySpring.bean.factory.config.BeanPostProcessor;
+import com.wzy.mySpring.context.annotation.Autowired;
+import com.wzy.mySpring.context.annotation.Component;
+import com.wzy.mySpring.context.annotation.ComponentScan;
+import com.wzy.mySpring.context.annotation.Scope;
+import com.wzy.mySpring.bean.factory.config.BeanDefinition;
 
 import java.beans.Introspector;
 import java.io.File;
-import java.io.ObjectInputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
@@ -17,7 +18,7 @@ public class MyApplicationContext {
 
     private Class configClass;
 
-    private Map<String,BeanDefinition> beanDefinitionMap = new HashMap<>();
+    private Map<String, BeanDefinition> beanDefinitionMap = new HashMap<>();
 
     private List<BeanPostProcessor> beanPostProcessorList = new ArrayList<>();
 
@@ -74,7 +75,7 @@ public class MyApplicationContext {
                 }
                 for (BeanPostProcessor beanPostProcessor : beanPostProcessorList) {
                     instance = beanPostProcessor.postProcessBeforeInitialization(instance, beanName);
-                    
+
                 }
                 if(instance instanceof InitializingBean){
                     ((InitializingBean) instance).afterPropertiesSet();
